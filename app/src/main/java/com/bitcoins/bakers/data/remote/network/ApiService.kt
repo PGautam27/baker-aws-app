@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET(Constants.GETURL)
-    suspend fun get() : baker
+    suspend fun getItems() : baker
 
 }
