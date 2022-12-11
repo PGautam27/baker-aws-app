@@ -17,9 +17,9 @@ class BakerRepoImpl(
 
     override suspend fun getItems(): baker? {
         try {
-            val items = apiService.getItems()
+            val item = apiService.getItems()
             Log.v("items","$items")
-            return items
+            return item
         }
         catch (e : Exception){
             Log.v("items","Didn't work")
