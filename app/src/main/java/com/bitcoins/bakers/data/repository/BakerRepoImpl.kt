@@ -1,29 +1,20 @@
 package com.bitcoins.bakers.data.repository
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bitcoins.bakers.data.remote.dto.baker
-import com.bitcoins.bakers.data.remote.network.ApiClient
+import com.bitcoins.bakers.data.remote.network.ApiService
 import com.bitcoins.bakers.presentation.repository.BakerRepo
+import javax.inject.Inject
 
-class BakerRepoImpl(
-    apiClient : ApiClient,
-    application: Application
-):BakerRepo {
-
-    private val apiService = apiClient.getApiService(application)
+class BakerRepoImpl @Inject constructor(private val api: ApiService) :BakerRepo {
     val items = MutableLiveData<baker>()
 
     override suspend fun getItems(): baker? {
-        try {
-            val item = apiService.getItems()
-            Log.v("items","$items")
-            return item
+        return try {
+            api.getItems()
+        } catch (e:Exception){
+            null
         }
-        catch (e : Exception){
-            Log.v("items","Didn't work")
-        }
-        return null
     }
 }

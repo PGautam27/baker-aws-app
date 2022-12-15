@@ -1,4 +1,4 @@
-package com.bitcoins.bakers
+package com.bitcoins.bakers.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,18 +8,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,8 +22,10 @@ import com.bitcoins.bakers.presentation.itemScreen.itemViewModelFactory
 import com.bitcoins.bakers.presentation.itemScreen.itemViewmodel
 import com.bitcoins.bakers.presentation.screen.Screens
 import com.bitcoins.bakers.ui.theme.BakersTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     
     private lateinit var itemViewmodel: itemViewmodel
@@ -58,7 +55,7 @@ class MainActivity : ComponentActivity() {
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun FirstScreen(itemViewmodel: itemViewmodel,onClick : () -> Unit) {
+fun FirstScreen(itemViewmodel: itemViewmodel, onClick: () -> Unit, function: () -> Unit) {
     
     val coroutineScope = rememberCoroutineScope()
     val ok = itemViewmodel.works.observeAsState()
